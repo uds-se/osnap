@@ -1,0 +1,140 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>de.uni-saarland.cs.st</groupId>
+	<artifactId>de.unisaarland.cs.st.osnap</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<developers>
+		<developer>
+			<name>Alessio Gambi</name>
+			<email>gambi@st.cs.uni-saarland.de</email>
+		</developer>
+	</developers>
+
+    <!-- I you work on windows or linux you might need to change this URL -->
+	<repositories>
+		<repository>
+			<id>my-local-repo</id>
+			<url>file:///${basedir}/my-repo</url>
+		</repository>
+	</repositories>
+
+	<dependencies>
+        
+        <!-- 
+         NOTE: This dependency must be MANUALLY placed inside "my-repo/ibm/cplex/1.0" because the cplex jar comes with the CPLEX distribution, and we cannot
+         redistribute that -->
+        <dependency>
+            <groupId>ibm</groupId>
+            <artifactId>cplex</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        
+		<dependency>
+			<groupId>commons-cli</groupId>
+			<artifactId>commons-cli</artifactId>
+			<version>1.3.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.xerial</groupId>
+			<artifactId>sqlite-jdbc</artifactId>
+			<version>3.8.11.2</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+			<version>2.7</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.googlecode.combinatoricslib</groupId>
+			<artifactId>combinatoricslib</artifactId>
+			<version>2.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.esotericsoftware.yamlbeans</groupId>
+			<artifactId>yamlbeans</artifactId>
+			<version>1.08</version>
+		</dependency>
+
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jgrapht</groupId>
+			<artifactId>jgrapht-core</artifactId>
+			<version>0.9.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jgrapht</groupId>
+			<artifactId>jgrapht-ext</artifactId>
+			<version>0.9.2</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org</groupId>
+			<artifactId>javailp</artifactId>
+			<version>1.2a</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>6.9.10</version>
+			<scope>test</scope>
+		</dependency>
+
+
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>appassembler-maven-plugin</artifactId>
+				<version>1.10</version>
+				<configuration>
+					<programs>
+						<program>
+							<mainClass>de.unisaarland.cs.st.evaluation.EvaluationDriver</mainClass>
+							<id>evaluation-driver</id>
+						</program>
+						<!-- -->
+						<program>
+							<mainClass>de.unisaarland.cs.st.util.sqlite.TestJobGenerator</mainClass>
+							<id>test-job-generator</id>
+						</program>
+						<!-- -->
+						<program>
+							<mainClass>de.unisaarland.cs.st.util.sqlite.BaseImageGenerator</mainClass>
+							<id>base-image-generator</id>
+						</program>
+						<!-- -->
+						<program>
+							<mainClass>de.unisaarland.cs.st.evaluation.ResultReader</mainClass>
+							<id>result-reader</id>
+						</program>
+					</programs>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
