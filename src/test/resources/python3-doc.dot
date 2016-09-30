@@ -1,0 +1,13 @@
+digraph "python3-doc" {
+	rankdir=LR;
+	node [shape=box];
+	"python3-doc" -> "python3.4-doc" [color=blue,label="(>= 3.4.2-0)"];
+	"python3.4-doc" -> "libjs-jquery" [color=blue];
+	"libjs-jquery" -> "jquery" [color=red];
+	"libjs-jquery" -> "jquery" [color=red];
+	"python3.4-doc" -> "libjs-underscore" [color=blue];
+	"python3-doc" [style="setlinewidth(2)"]
+	"jquery" [style=filled,fillcolor=oldlace];
+}
+// total size of all shown packages: 37841920
+// download size of all shown packages: 4892004

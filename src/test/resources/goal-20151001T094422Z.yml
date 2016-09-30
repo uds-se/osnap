@@ -1,0 +1,4 @@
+!de.unisaarland.cs.st.data.Goal
+alpha: 0.999
+beta: 0.001
+maxOnDemandInstances: 1

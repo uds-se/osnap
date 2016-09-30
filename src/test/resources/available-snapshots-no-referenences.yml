@@ -1,0 +1,11 @@
+!at.ac.tuwien.dsg.gambi.ase2015.data.Image
+installedPackages: 
+- !at.ac.tuwien.dsg.gambi.ase2015.data.Package
+   name: A
+   installationTime: 10
+   installationCost: 2
+parentImage:
+   name: Empty
+---
+!at.ac.tuwien.dsg.gambi.ase2015.data.Image
+name: Empty

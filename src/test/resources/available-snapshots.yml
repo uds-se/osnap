@@ -1,0 +1,7 @@
+!de.unisaarland.cs.st.data.Image
+installedPackages: 
+- !de.unisaarland.cs.st.data.Package
+   name: A
+   version: 0.1
+   downloadTime: 2
+   installationTime: 10

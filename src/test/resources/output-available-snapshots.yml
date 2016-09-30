@@ -1,0 +1,8 @@
+!at.ac.tuwien.dsg.gambi.ase2015.data.Image
+installedPackages: 
+- !at.ac.tuwien.dsg.gambi.ase2015.data.Package
+   name: A
+   installationTime: 10
+parentImage: &1
+   name: Empty
+--- *1

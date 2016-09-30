@@ -1,0 +1,6 @@
+!de.unisaarland.cs.st.data.CloudModel
+nReservedInstances: 1
+but : 60
+costOfReservedInstancePerBUT: 0
+costOfOnDemandInstancePerBUT: 56 
+timeToSnapshot: 20

@@ -1,0 +1,72 @@
+!at.ac.tuwien.dsg.gambi.ase2015.data.Image
+installedPackages: 
+- &1 !at.ac.tuwien.dsg.gambi.ase2015.data.Package
+   name: python3-doc
+   depends: 
+   - &2 !at.ac.tuwien.dsg.gambi.ase2015.data.Package
+      name: libjs-underscore
+      depends: 
+      - *1
+      - &3 !at.ac.tuwien.dsg.gambi.ase2015.data.Package
+         name: libjs-jquery
+         depends: 
+         - *1
+         - *2
+         - &4 !at.ac.tuwien.dsg.gambi.ase2015.data.Package
+            name: python3.4-doc
+            depends: 
+            - *1
+            - *2
+            - *3
+            - &5 !at.ac.tuwien.dsg.gambi.ase2015.data.Package
+               name: jquery
+               depends: 
+               - *1
+               - *2
+               - *3
+               - *4
+         - *5
+      - *4
+      - *5
+   - *3
+   - *4
+   - *5
+   installationTime: 2731
+   sourceInstallationTime: 641
+- *2
+- *3
+- *4
+- *5
+--- !at.ac.tuwien.dsg.gambi.ase2015.data.Image
+installedPackages: 
+- *1
+- *2
+- &6 !at.ac.tuwien.dsg.gambi.ase2015.data.Package
+   name: tzdata
+   depends: 
+   - &7 !at.ac.tuwien.dsg.gambi.ase2015.data.Package
+      name: debconf
+      depends: 
+      - *6
+      - &8 !at.ac.tuwien.dsg.gambi.ase2015.data.Package
+         name: python3-tz
+         depends: 
+         - *6
+         - *7
+         - &9 !at.ac.tuwien.dsg.gambi.ase2015.data.Package
+            name: python3:any
+            depends: 
+            - *6
+            - *7
+            - *8
+         installationTime: 233
+         sourceInstallationTime: 6085
+      - *9
+   - *8
+   - *9
+- *7
+- *3
+- *8
+- *4
+- *9
+- *5

@@ -1,0 +1,18 @@
+!at.ac.tuwien.dsg.gambi.ase2015.data.TestJob
+sut: 
+   name: A
+   installationTime: 10
+   installationCost: 2
+dependencies: 
+- !at.ac.tuwien.dsg.gambi.ase2015.data.Package
+   name: B
+   installationTime: 5
+   installationCost: 1
+testDuration: 7
+
+--- !at.ac.tuwien.dsg.gambi.ase2015.data.TestJob
+sut:
+   name: B
+   installationTime: 5
+   installationCost: 1
+testDuration: 12

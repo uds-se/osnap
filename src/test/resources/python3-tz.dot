@@ -1,0 +1,18 @@
+digraph "python3-tz" {
+	rankdir=LR;
+	node [shape=box];
+	"python3-tz" -> "tzdata" [color=blue];
+	"tzdata" -> "debconf" [color=blue,label="(>= 0.5)"];
+	"python3-tz" -> "python3:any" [color=blue,label="(>= 3.3.2-2~)"];
+	"python3:any" -> virt1 [dir=back,arrowtail=inv,color=green];
+	"python3:any" [shape=octagon];
+	"python3-tz" [style="setlinewidth(2)"]
+	virt1 [
+		shape = "record"
+		style = "rounded"
+		label = "<python3> \{python3\} | <python3> \{python3\}"
+	]
+	"debconf" [shape=diamond];
+}
+// total size of all shown packages: 1727488
+// download size of all shown packages: 23290

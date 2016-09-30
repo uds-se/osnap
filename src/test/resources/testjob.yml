@@ -1,0 +1,10 @@
+!at.ac.tuwien.dsg.gambi.ase2015.data.TestJob
+dependencies: 
+- &1 !at.ac.tuwien.dsg.gambi.ase2015.data.Package
+   name: B
+   installationTime: 5
+sut: 
+   name: A
+   installationTime: 10
+--- !at.ac.tuwien.dsg.gambi.ase2015.data.TestJob
+sut: *1

@@ -1,0 +1,74 @@
+!at.ac.tuwien.dsg.gambi.ase2015.data.TestJob
+id: 4
+sut: &1
+   name: python3:any
+   depends: 
+   - &2 !at.ac.tuwien.dsg.gambi.ase2015.data.Package
+      name: tzdata
+      depends: 
+      - &3 !at.ac.tuwien.dsg.gambi.ase2015.data.Package
+         name: debconf
+         depends: 
+         - *2
+         - &4 !at.ac.tuwien.dsg.gambi.ase2015.data.Package
+            name: python3-tz
+            depends: 
+            - *2
+            - *3
+            - *1
+            installationTime: 233
+            sourceInstallationTime: 6085
+         - *1
+      - *4
+      - *1
+   - *3
+   - *4
+--- !at.ac.tuwien.dsg.gambi.ase2015.data.TestJob
+id: 3
+dependencies: 
+- !at.ac.tuwien.dsg.gambi.ase2015.data.Package
+   name: adequate
+   version: 0.12.1
+- !at.ac.tuwien.dsg.gambi.ase2015.data.Package
+   name: bzip2
+   version: 1.0.6-7+b3
+- !at.ac.tuwien.dsg.gambi.ase2015.data.Package
+   name: binutils
+   version: 2.25-6
+- !at.ac.tuwien.dsg.gambi.ase2015.data.Package
+   name: dpkg-dev
+   version: 1.17.25
+sut: &5
+   name: python3-doc
+   depends: 
+   - &6 !at.ac.tuwien.dsg.gambi.ase2015.data.Package
+      name: libjs-underscore
+      depends: 
+      - *5
+      - &7 !at.ac.tuwien.dsg.gambi.ase2015.data.Package
+         name: libjs-jquery
+         depends: 
+         - *5
+         - *6
+         - &8 !at.ac.tuwien.dsg.gambi.ase2015.data.Package
+            name: python3.4-doc
+            depends: 
+            - *5
+            - *6
+            - *7
+            - &9 !at.ac.tuwien.dsg.gambi.ase2015.data.Package
+               name: jquery
+               depends: 
+               - *5
+               - *6
+               - *7
+               - *8
+         - *9
+      - *8
+      - *9
+   - *7
+   - *8
+   - *9
+   installationTime: 2731
+   sourceInstallationTime: 641
+testDuration: 320

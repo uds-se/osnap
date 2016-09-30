@@ -1,0 +1,10 @@
+!java.util.HashSet
+- &1 !de.unisaarland.cs.st.data.Image
+   name: Empty
+- !de.unisaarland.cs.st.data.Image
+   name: A
+   installedPackages: 
+   - !de.unisaarland.cs.st.data.Package
+      name: A
+      installationTime: 10
+   parentImage: *1
