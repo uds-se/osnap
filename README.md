@@ -134,7 +134,7 @@ For example, at time 0 on RESERVED INSTANCE 0, a (S)napshot job takes place. The
     
 ## Where do I find more on O!Snap?
 
-Visit the [O!Snap Home Page](https://www.st.cs.uni-saarland.de/testing/osnap/) or [write us an email](gambi@st.cs.uni-saarland.de).
+Visit the [O!Snap Home Page](https://www.st.cs.uni-saarland.de/testing/osnap/) or [write us an email](mailto:gambi@st.cs.uni-saarland.de).
 
 ## What O!Snap requires?
 
