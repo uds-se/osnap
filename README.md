@@ -138,14 +138,23 @@ Visit the [O!Snap Home Page](https://www.st.cs.uni-saarland.de/testing/osnap/) o
 
 ## What O!Snap requires?
 
-O!Snap relies on the IBM ILOG CPLEX Studio to efficently solve the optimization problems at the core of (Opportunistic Snapshotting and ILP Scheduler); therefore, you need to have CPLEX installed to run O!Snap. You can ask for a (free) academic license to IBM and then setup the tool as the vendor explains. Additionally, you need to install the cplex.jar in your maven local repository (or in the "my-repo" maven repository that comes with the code). 
+O!Snap relies on the IBM ILOG CPLEX Studio to efficently solve the optimization problems at the core of (Opportunistic Snapshotting and ILP Scheduler); therefore, you need to have CPLEX installed to run O!Snap. You can ask for a (free) academic license to IBM and then setup the tool as the vendor explains. Additionally, you need to install the cplex.jar in your maven local repository (or in the "my-repo" maven repository that comes with the code),
+and JavaILP, which is a java interface to define optimization problems.
+
+We cannot provide any of those libraries so you have to download and install to your repo manually.
+To ease this process we already configured a local repository in this project. Go inside the my-repo folder, look for the PLACEHOLDER files and substitute them with the actual jars of CPLEX and JavaILP.
+Follow the maven naming convention which is reported in the PLACEHOLDER name.
+
+You can find the cplex.jar in the CPLEX distribution and JavaILP (version 1.2a) on [sourceforge](https://sourceforge.net/projects/javailp/files/javailp/javailp%201.2a/)
+
+Additionally, O!Snap requires Java 1.8.
 
 ###### How to build O!Snap from source?
 
-Assuming that you have installed cplex and the cplex.jar, simply running the following commands should be enough:
+Assuming that you have installed cplex, cplex.jar, and JavaILP, runn the following commands should be enough:
 
 ```
 mvn clean compile package -DskipTests appassembler:assemble
 ```
 
-This will create a ready-to-go distribution under `target/appassembler`
+This will create a ready-to-go distribution under `target/appassembler` which you can invoke using the executable files under the appassembler/bin folder
