@@ -1,26 +1,28 @@
 # O!Snap: Cost-Efficient Testing in the Cloud
 
-This repository contains the latest public version of the O!Snap framework for planning cost-efficient test execution in the cloud.
+This repository contains the O!Snap framework for planning cost-efficient test execution in the cloud.
 
-Currently, this version of the code corresponds to the one used for the evaluation of the paper under submission at the International Conference on Software Testing (ICST'17), 2017.
+Version 0.0.1-SNAPSHOT of the code was used in the evaluation of the paper:
+A. Gambi, A. Gorla, and A. Zeller, "O!Snap: Cost-Efficient Testing in the Cloud"
+accepted for publication at the [International Conference on Software Testing (ICST'17), 2017][http://aster.or.jp/conference/icst2017/].
+
 
 ## What O!Snap does?
 
-O!Ssnap is a technique to automatically generate plans to cost-efficiently execute tests in the cloud.
-It takes as input the list of tests to execute with the dependencies they require, 
-the list of available virtual machine images with the depependencies they provide,
-and additional configuration parameters, such as the cost model adopted by the cloud provider and the objective function to minimize. 
+O!Snap aims to improve the current status of Continuous Integration by generating
+plans for cost-efficiently executing tests in virtualized environment, like the cloud.
 
-As output, it produces a test execution plan that suggests which virtual machine images to use for running the tests, 
-how to schedule their execution inside cloud instances,
-and how to create suitable virtual machine images.
+Like any other CI system, O!Snap takes as input the list of projects to build with the dependencies they require and the tests to execute. Additionally, it requires the list of available virtual machine images (or container images) with the dependencies they provide, and configuration parameters, such as the cost model adopted by the cloud provider and the objective function to minimize. 
+
+As output, O!Snap produces a test execution plan that suggests which images to use for running the tests of each project, 
+how to schedule their execution inside cloud instances, and how to *opportunistically* create new images.
 
 O!Snap works as a two-staged pipeline: it starts with *opportunistic snapshotting*, which aims to maximize the reuse of virtual machine images across test executions and define new images, or snapshots, to limit the effort of setting up test environments. And it ends with *test schedule planning*, which computes the test execution plan by interleaving the creation of new images and the execution of tests to minimize the overall test execution time and cost.
 
-###### How to use O!Snap?
+#### How to use O!Snap?
 
 To compute a test execution plan using our prototype you need to run the ```evaluation-driver```
-command as shown below. We introduce each paramater in the following.
+command as shown below:
 
 ```{r, engine='bash', count_lines}
 ./osnap/bin/evaluation-driver \
@@ -34,7 +36,7 @@ command as shown below. We introduce each paramater in the following.
     --result-processor [OPTIONAL RESULT PROCESSOR]
 ```
 
-Our prototype comes with a full implementation of the O!Snap approach (Opportunistic Snapshotting - On-line plus ILP Scheduler) and, additionally, it provides the implementation of competitive approaches for planning test executions in the cloud. All the planners are identified by their name (actually their qualified class name).
+Our prototype comes with a full implementation of the O!Snap approach (Opportunistic Snapshotting - On-line plus ILP Scheduler), and, additionally the implementation of competitive approaches for planning test executions in the cloud. All the planners are identified by the qualified name of the class which implements them.
 
 *Basic planners* do not use opportunistic snapshotting. They are:
 
@@ -44,13 +46,13 @@ Our prototype comes with a full implementation of the O!Snap approach (Opportuni
   - de.unisaarland.cs.st.planners.MinLoadPlanner
   - de.unisaarland.cs.st.planners.MaxParallelismPlanner
   - de.unisaarland.cs.st.planners.MaxParallelismPlannerOnlyOnDemand
-  - de.unisaarland.cs.st.planners.ILPPlanner
+  - de.unisaarland.cs.st.planners.ILPPlanner (O!Snap Planner)
 
 *Advanced planners* use opportunistic snapshotting, either off-line or on-line.
 Their name can be obtained by appending to the name of basic planners the following suffix:
 
-  - WithOpportunisticSnapshot
-  - WithOpportunisticSnapshotOffLine
+  - <BASE_PLANNER_NAME>WithOpportunisticSnapshot
+  - <BASE_PLANNER_NAME>WithOpportunisticSnapshotOffLine
 
 If multiple planner names are provided to the evaluation-driver command, it will execute all of them.
 
@@ -60,7 +62,7 @@ The test-jobs file contains the details (name, version and list of dependencies 
 
 The available-images file contains details of available images (provided dependencies) and like the test-jobs file is a yml serialization of a collection of java objects of type `Image`. Images can be uniquely identified using the `id` fields. We use the id to identify which base-image (if any) the execution planner shall consider. You can generate such files using the `base-image-generator` command.
 
-The cloud-model and goal files are pojo object that merely contains data. Cloud-model contains data about the configuration of the cloud (pricing, time to create snapshots, availability of resources, etc.). Goal contains data about the objective function that the planners must optimize and optional constraints on maximum execution time, resource usage, and cost.
+The cloud-model and goal files are POJO (Plain Old Java Object) object that merely contains data. Cloud-model contains data about the configuration of the cloud (pricing, time to create snapshots, availability of resources, etc.). Goal contains data about the objective function that the planners must optimize and optional constraints on maximum execution time, resource usage, and cost.
 
 Optionally you can store the output of the execution (a serialized collection of `Result` objects) in a specific output file (`--output-file`), and/or you can post process results from previous run (. This is useful for example to perform analysis on the execution, plotting test execution plans, or extracting relevant information from them (`--result-processor`). Additionally, post-processing of results can be done using the `result-reader` command.
 
@@ -99,7 +101,7 @@ Now, if you want to have a deeper view on the output of the planning, you can ru
   --result-processor de.unisaarland.cs.st.evaluation.resultprocessors.StdOutScheduleProcessor
 ```
 
-This commadn reads the serialized result and plot the actual test schedule plans as computed by each of the planners.
+This command reads the serialized result and plot the actual test schedule plans as computed by each of the planners.
 Below we report only the one computed using O!Snap (ILPPlannerWithOpportunisticSnapshot)
 
 ```
@@ -138,7 +140,7 @@ Visit the [O!Snap Home Page](https://www.st.cs.uni-saarland.de/testing/osnap/) o
 
 ## What O!Snap requires?
 
-O!Snap relies on the IBM ILOG CPLEX Studio to efficently solve the optimization problems at the core of (Opportunistic Snapshotting and ILP Scheduler); therefore, you need to have CPLEX installed to run O!Snap. You can ask for a (free) academic license to IBM and then setup the tool as the vendor explains. Additionally, you need to install the cplex.jar in your maven local repository (or in the "my-repo" maven repository that comes with the code),
+O!Snap relies on the IBM ILOG CPLEX Studio to efficiently solve the optimization problems at the core of (Opportunistic Snapshotting and ILP Scheduler); therefore, you need to have CPLEX installed to run O!Snap. You can ask for a (free) academic license to IBM and then setup the tool as the vendor explains. Additionally, you need to install the cplex.jar in your maven local repository (or in the "my-repo" maven repository that comes with the code),
 and JavaILP, which is a java interface to define optimization problems.
 
 We cannot provide any of those libraries so you have to download and install to your repo manually.
@@ -151,7 +153,7 @@ Additionally, O!Snap requires Java 1.8.
 
 ###### How to build O!Snap from source?
 
-Assuming that you have installed cplex, cplex.jar, and JavaILP, runn the following commands should be enough:
+Assuming that you have installed cplex, cplex.jar, and JavaILP, run the following commands should be enough:
 
 ```
 mvn clean compile package -DskipTests appassembler:assemble
